@@ -395,8 +395,8 @@ function RABBIT(){
     }
   };
 
-  // Poly1305KeySize = 32;
-  // Poly1305TagSize = 16;
+  // Poly1305 KeySize = 32;
+  // Poly1305 TagSize = 16;
 
   var Poly1305 = function(key) {
     this.buffer = new Uint8Array(16);

@@ -1,17 +1,25 @@
 {
   "name": "rabbit-cipher",
-  "description": "rabbit cipher in javascript",
-  "main": "index.js",
+  "description": "rabbit 128bit cipher with poly1305 in javascript",
+  "main": "./dist/rabbit.js",
   "authors": [
-    "angeal185 <beneaves01@hotmail.com>"
+    "ben eaves"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/angeal185/rabbit-cipher",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
+  ],
+  "keywords": [
+    "rabbit-cipher",
+    "rabbit",
+    "encryption",
+    "decryption",
+    "cipher",
+    "poly1305",
+    "nodejs",
+    "browser"
   ]
 }

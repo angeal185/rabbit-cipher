@@ -1,7 +1,7 @@
 {
   "name": "rabbit-cipher",
   "version": "1.0.0",
-  "description": "rabbit cipher in javascript",
+  "description": "rabbit 128bit cipher with poly1305 in javascript",
   "main": "index.js",
   "directories": {
     "doc": "docs",
@@ -15,9 +15,18 @@
     "type": "git",
     "url": "git+https://github.com/angeal185/rabbit-cipher.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "rabbit-cipher",
+    "rabbit",
+    "encryption",
+    "decryption",
+    "cipher",
+    "poly1305",
+    "nodejs",
+    "browser"
+  ],
+  "author": "ben eaves",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/angeal185/rabbit-cipher/issues"
   },

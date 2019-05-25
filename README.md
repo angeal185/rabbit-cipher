@@ -235,7 +235,6 @@ bsc.utils.randomBytes(length) // prng byteArray
 bsc.utils.isUint8(i) // check Uint8Array
 bsc.utils.isArray(i) // check array
 bsc.utils.isString(i) // check string
-bsc.utils.isEqual(a,b)  // check if equal
 
 // demo
 

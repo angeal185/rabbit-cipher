@@ -1,0 +1,25 @@
+{
+  "name": "rabbit-cipher",
+  "version": "1.0.0",
+  "description": "rabbit cipher in javascript",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angeal185/rabbit-cipher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angeal185/rabbit-cipher/issues"
+  },
+  "homepage": "https://github.com/angeal185/rabbit-cipher#readme"
+}

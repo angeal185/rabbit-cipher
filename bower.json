@@ -1,0 +1,17 @@
+{
+  "name": "rabbit-cipher",
+  "description": "rabbit cipher in javascript",
+  "main": "index.js",
+  "authors": [
+    "angeal185 <beneaves01@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/angeal185/rabbit-cipher",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

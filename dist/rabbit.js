@@ -168,74 +168,6 @@ function RABBIT(){
 
   }
 
-  function PBKDF2(secret, salt, cfg, cb){
-
-    if(!util.isUint8(secret)){
-      if(util.isString(secret)){
-        secret = util.s2u8(secret)
-      }
-      if(util.isArray(secret)){
-        secret = new Uint8Array(secret)
-      }
-    }
-    if(!util.isUint8(salt)){
-      if(util.isString(salt)){
-        salt = util.s2u8(salt)
-      }
-      if(util.isArray(salt)){
-        salt = new Uint8Array(salt)
-      }
-    }
-
-    let defaults = {
-      iterations: 10000,
-      hash: '512',
-      keylen: 32
-    },
-    obj = {};
-    if(typeof cfg === 'function'){
-      cb = cfg;
-      cfg = defaults;
-    } else {
-
-    }
-
-
-
-    wcs.digest({name: "SHA-" + defaults.hash},secret)
-    .then(function(hash){
-
-      wcs.importKey("raw", new Uint8Array(hash),{name: "PBKDF2"},false,["deriveBits"])
-        .then(function(key){
-          wcs.deriveBits({
-                "name": "PBKDF2",
-                salt: salt,
-                iterations: defaults.iterations,
-                hash: {name: "SHA-" + defaults.hash},
-              },
-              key,
-              defaults.keylen
-          )
-            .then(function(bits){
-              cb(false, new Uint8Array(bits));
-            })
-            .catch(function(err){
-                console.error(err);
-                cb(true, null)
-            });
-        })
-      .catch(function(err){
-          console.error(err);
-          cb(true, null)
-      });
-
-    })
-    .catch(function(err){
-        console.error(err);
-    });
-
-  }
-
   let x = [],c = [],b;
 
   const Rabbit = {
@@ -601,12 +533,15 @@ function RABBIT(){
   };
 
   const poly1305 = {
-    sign: function(m, bytes, key, digest) {
+    signSync: function(m, bytes, key, digest) {
+      if(util.isString(key)){
+        key = util.s2u8(key)
+      }
       var ctx = new Poly1305(key);
       ctx.update(m, bytes);
       return checkKey(digest, ctx.finish(), true)
     },
-    verify: function(mac1, mac2, digest) {
+    verifySync: function(mac1, mac2, digest) {
       mac1 = checkKey(digest, mac1, false);
       mac2 = checkKey(digest, mac2, false)
       var dif = 0;
@@ -615,6 +550,24 @@ function RABBIT(){
       }
       dif = (dif - 1) >>> 31;
       return (dif & 1);
+    },
+    sign: function(m, bytes, key, digest, cb) {
+      try {
+        let res = poly1305.signSync(m, bytes, key, digest);
+        cb(false, res);
+        return;
+      } catch (err) {
+        cb(err, null)
+      }
+    },
+    verify: function(mac1, mac2, digest, cb) {
+      try {
+        let res = poly1305.verifySync(mac1, mac2, digest);
+        cb(false, res);
+        return;
+      } catch (err) {
+        cb(err, null)
+      }
     }
   }
 
@@ -622,6 +575,22 @@ function RABBIT(){
     enc: function(plain, secret, digest, cb){
       try {
         cb(false, Rabbit.encrypt(plain, secret, digest))
+        return;
+      } catch (err) {
+        cb(err, null)
+      }
+    },
+    encPoly: function(plain, secret, skey, digest, cb){
+      try {
+        let obj = {
+          ctext: Rabbit.encrypt(plain, secret, digest)
+        }
+        let ctext = Rabbit.encrypt(plain, secret, digest)
+        poly1305.sign(obj.ctext, obj.ctext.length, skey, digest, function(err, sig){
+          if(err){return cb(err, null)}
+          obj.sig = sig;
+          cb(false, obj)
+        })
         return;
       } catch (err) {
         cb(err, null)
@@ -635,10 +604,23 @@ function RABBIT(){
         cb(err, null)
       }
     },
+    decPoly: function(ctext, secret, skey, skey2, digest, cb){
+      try {
+        poly1305.verify(skey, skey2, digest, function(err, ver){
+          if(ver){
+            cb(false, Rabbit.decrypt(ctext, secret, digest))
+            return;
+          } else {
+            cb('rabbit poly1305 authentication failure', null)
+          }
+        });
+      } catch (err) {
+        cb(err, null)
+      }
+    },
     encSync: Rabbit.encrypt,
     decSync: Rabbit.decrypt,
     poly1305: poly1305,
-    PBKDF2: PBKDF2,
     utils: util
   }
 }

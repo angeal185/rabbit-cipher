@@ -212,6 +212,31 @@ rabbit.poly1305.signSync(ctext, len, key, digest)
 rabbit.poly1305.verifySync(sig1, sig2, digest)
 
 
+
+/* utils */
+
+bsc.utils.u82s(Uint8Array) // Uint8Array to string
+bsc.utils.s2u8(string) // string to Uint8Array
+bsc.utils.b2s(Uint8Array) // byteArray to string
+bsc.utils.s2b(string) // string to byteArray
+bsc.utils.a2b(byteArray) // byteArray to binary
+bsc.utils.b2a(byteArray) // binary to byteArray
+bsc.utils.u82a(uint8Array) // uint8Array to byteArray
+bsc.utils.h2u8(string) // hex to Uint8Array
+bsc.utils.u82h(Uint8Array) // uint8Array to hex
+bsc.utils.h2s(string) // hex to string
+bsc.utils.s2h(string) // string to hex
+bsc.utils.u8to16(Uint8Array) // Uint8Array to Uint16Array
+bsc.utils.u16to8(Uint16Array) //  Uint16Array to Uint8Array
+
+bsc.utils.secRand(string) // prng single
+bsc.utils.randomBytes(length) // prng byteArray
+
+bsc.utils.isUint8(i) // check Uint8Array
+bsc.utils.isArray(i) // check array
+bsc.utils.isString(i) // check string
+bsc.utils.isEqual(a,b)  // check if equal
+
 // demo
 
 const utils = rabbit.utils,

@@ -580,6 +580,16 @@ function RABBIT(){
         cb(err, null)
       }
     },
+    encP: function(plain, secret, digest){
+      return new Promise(function(resolve, reject){
+        try {
+          let res = Rabbit.encrypt(plain, secret, digest);
+          resolve(res);
+        } catch (err) {
+          reject('rabbit encrypt error');
+        }
+      })
+    },
     encPoly: function(plain, secret, skey, digest, cb){
       try {
         let obj = {
@@ -596,6 +606,24 @@ function RABBIT(){
         cb(err, null)
       }
     },
+    encPolyP: function(plain, secret, skey, digest){
+      return new Promise(function(resolve, reject){
+        try {
+          let obj = {
+            ctext: Rabbit.encrypt(plain, secret, digest)
+          }
+          let ctext = Rabbit.encrypt(plain, secret, digest)
+          poly1305.sign(obj.ctext, obj.ctext.length, skey, digest, function(err, sig){
+            if(err){return reject(err)}
+            obj.sig = sig;
+            resolve(obj)
+          })
+          return;
+        } catch (err) {
+          reject(err)
+        }
+      })
+    },
     dec: function(ctext, secret, digest, cb){
       try {
         cb(false, Rabbit.decrypt(ctext, secret, digest))
@@ -603,6 +631,16 @@ function RABBIT(){
       } catch (err) {
         cb(err, null)
       }
+    },
+    decP: function(ctext, secret, digest){
+      return new Promise(function(resolve, reject){
+        try {
+          let res = Rabbit.decrypt(ctext, secret, digest);
+          resolve(res);
+        } catch (err) {
+          reject('rabbit encrypt error');
+        }
+      })
     },
     decPoly: function(ctext, secret, skey, skey2, digest, cb){
       try {
@@ -617,6 +655,22 @@ function RABBIT(){
       } catch (err) {
         cb(err, null)
       }
+    },
+    decPolyP: function(ctext, secret, skey, skey2, digest, cb){
+      return new Promise(function(resolve, reject){
+        try {
+          poly1305.verify(skey, skey2, digest, function(err, ver){
+            if(ver){
+              resolve(Rabbit.decrypt(ctext, secret, digest))
+              return;
+            } else {
+              reject('poly1305 authentication failure')
+            }
+          });
+        } catch (err) {
+          reject('rabbit decrypt error');
+        }
+      })
     },
     encSync: Rabbit.encrypt,
     decSync: Rabbit.decrypt,

@@ -1,3 +1,5 @@
+//browser
+
 const utils = rabbit.utils,
 cl = console.log,
 ce = console.error,
@@ -9,24 +11,40 @@ digest = 'hex';
 /*
 //sync test
 let sync = rabbit.encSync('test', secret, 'base64');
-console.log(sync)
+cl(sync)
 sync = rabbit.decSync(sync, secret, 'base64')
-console.log(sync)
+cl(sync)
 */
 
 /*
-// enc/dec test
+// enc/dec ~ callback
 rabbit.enc(text, secret, digest, function(err, ctext){
-  if(err){return console.error(err)};
+  if(err){return ce(err)};
   rabbit.dec(ctext, secret, digest, function(err, plain){
-    if(err){return console.error(err)};
+    if(err){return ce(err)};
     if(plain === text){
-      console.log('enc/dec test pass');
+      cl('enc/dec test pass');
     }
   });
 });
 */
 
+// enc/dec ~ promise
+rabbit.encP(text, secret, digest).then(function(ctext){
+
+  rabbit.decP(ctext, secret, digest).then(function(plain){
+    if(plain === text){
+      cl('enc/dec test pass');
+    }
+  }).catch(function(err){
+    ce(err)
+  })
+}).catch(function(err){
+  ce(err)
+})
+
+/*
+// encrypt/decrypt with poly1305 ~ callback
 rabbit.encPoly(text, secret, skey, digest, function(err, res){
   if(err){return ce(err)};
 
@@ -38,10 +56,25 @@ rabbit.encPoly(text, secret, skey, digest, function(err, res){
   });
 
 });
+*/
+
+/*
+// encrypt/decrypt with poly1305 ~ promise
+rabbit.encPolyP(text, secret, skey, digest).then(function(res){
+  let verify = rabbit.poly1305.signSync(res.ctext, res.ctext.length, skey, digest);
+  rabbit.decPolyP(res.ctext, secret, res.sig, verify, digest).then(function(plain){
+    cl(plain)
+  }).catch(function(err){
+    ce(err)
+  })
+}).catch(function(err){
+  ce(err)
+})
+*/
 
 /*
 rabbit.enc(text, secret, digest, function(err, ctext){
-  if(err){return console.error(err)};
+  if(err){return ce(err)};
 
   rabbit.poly1305.sign(ctext, ctext.length, skey, digest, function(err, sig){
 
@@ -50,16 +83,14 @@ rabbit.enc(text, secret, digest, function(err, ctext){
     rabbit.poly1305.verify(sig, verify, digest, function(err, ver){
       if(ver){
         rabbit.dec(ctext, secret, digest, function(err, plain){
-          if(err){return console.error(err)};
-          console.log(plain);
+          if(err){return ce(err)};
+          cl(plain);
         });
       } else {
-        console.error('rabbit poly1305 authentication failure')
+        ce('rabbit poly1305 authentication failure')
       }
     });
 
   })
 });
 */
-
-//pdkf2 test

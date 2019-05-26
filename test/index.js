@@ -10,13 +10,13 @@ skey = utils.randomBytes(32),
 salt = 'salt',
 text = 'test',
 digest = 'base64';
-/*
+
 //sync test
 let sync = rabbit.encSync('test', secret, 'base64');
 cl(sync)
 sync = rabbit.decSync(sync, secret, 'base64')
 cl(sync)
-*/
+
 
 
 // enc/dec ~ promise
@@ -33,7 +33,7 @@ rabbit.encP(text, secret, digest).then(function(ctext){
   ce(err)
 })
 
-/*
+
 
 rabbit.encPoly(text, secret, skey, digest, function(err, res){
   if(err){return ce(err)};
@@ -46,7 +46,7 @@ rabbit.encPoly(text, secret, skey, digest, function(err, res){
   });
 
 });
-*/
+
 
 // encrypt/decrypt with poly1305 ~ promise
 rabbit.encPolyP(text, secret, skey, digest).then(function(res){
@@ -60,7 +60,7 @@ rabbit.encPolyP(text, secret, skey, digest).then(function(res){
   ce(err)
 })
 
-/*
+
 rabbit.enc(text, secret, digest, function(err, ctext){
   if(err){return ce(err)};
 
@@ -81,4 +81,3 @@ rabbit.enc(text, secret, digest, function(err, ctext){
 
   })
 });
-*/

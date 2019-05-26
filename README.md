@@ -215,26 +215,26 @@ rabbit.poly1305.verifySync(sig1, sig2, digest)
 
 /* utils */
 
-bsc.utils.u82s(Uint8Array) // Uint8Array to string
-bsc.utils.s2u8(string) // string to Uint8Array
-bsc.utils.b2s(Uint8Array) // byteArray to string
-bsc.utils.s2b(string) // string to byteArray
-bsc.utils.a2b(byteArray) // byteArray to binary
-bsc.utils.b2a(byteArray) // binary to byteArray
-bsc.utils.u82a(uint8Array) // uint8Array to byteArray
-bsc.utils.h2u8(string) // hex to Uint8Array
-bsc.utils.u82h(Uint8Array) // uint8Array to hex
-bsc.utils.h2s(string) // hex to string
-bsc.utils.s2h(string) // string to hex
-bsc.utils.u8to16(Uint8Array) // Uint8Array to Uint16Array
-bsc.utils.u16to8(Uint16Array) //  Uint16Array to Uint8Array
+rabbit.utils.u82s(Uint8Array) // Uint8Array to string
+rabbit.utils.s2u8(string) // string to Uint8Array
+rabbit.utils.b2s(Uint8Array) // byteArray to string
+rabbit.utils.s2b(string) // string to byteArray
+rabbit.utils.a2b(byteArray) // byteArray to binary
+rabbit.utils.b2a(byteArray) // binary to byteArray
+rabbit.utils.u82a(uint8Array) // uint8Array to byteArray
+rabbit.utils.h2u8(string) // hex to Uint8Array
+rabbit.utils.u82h(Uint8Array) // uint8Array to hex
+rabbit.utils.h2s(string) // hex to string
+rabbit.utils.s2h(string) // string to hex
+rabbit.utils.u8to16(Uint8Array) // Uint8Array to Uint16Array
+rabbit.utils.u16to8(Uint16Array) //  Uint16Array to Uint8Array
 
-bsc.utils.secRand(string) // prng single
-bsc.utils.randomBytes(length) // prng byteArray
+rabbit.utils.secRand(string) // prng single
+rabbit.utils.randomBytes(length) // prng byteArray
 
-bsc.utils.isUint8(i) // check Uint8Array
-bsc.utils.isArray(i) // check array
-bsc.utils.isString(i) // check string
+rabbit.utils.isUint8(i) // check Uint8Array
+rabbit.utils.isArray(i) // check array
+rabbit.utils.isString(i) // check string
 
 // demo
 

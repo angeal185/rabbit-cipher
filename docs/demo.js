@@ -8,15 +8,15 @@ skey = utils.randomBytes(32),
 text = 'test',
 digest = 'hex';
 
-/*
+
 //sync test
 let sync = rabbit.encSync('test', secret, 'base64');
 cl(sync)
 sync = rabbit.decSync(sync, secret, 'base64')
 cl(sync)
-*/
 
-/*
+
+
 // enc/dec ~ callback
 rabbit.enc(text, secret, digest, function(err, ctext){
   if(err){return ce(err)};
@@ -27,7 +27,7 @@ rabbit.enc(text, secret, digest, function(err, ctext){
     }
   });
 });
-*/
+
 
 // enc/dec ~ promise
 rabbit.encP(text, secret, digest).then(function(ctext){
@@ -43,7 +43,7 @@ rabbit.encP(text, secret, digest).then(function(ctext){
   ce(err)
 })
 
-/*
+
 // encrypt/decrypt with poly1305 ~ callback
 rabbit.encPoly(text, secret, skey, digest, function(err, res){
   if(err){return ce(err)};
@@ -56,9 +56,9 @@ rabbit.encPoly(text, secret, skey, digest, function(err, res){
   });
 
 });
-*/
 
-/*
+
+
 // encrypt/decrypt with poly1305 ~ promise
 rabbit.encPolyP(text, secret, skey, digest).then(function(res){
   let verify = rabbit.poly1305.signSync(res.ctext, res.ctext.length, skey, digest);
@@ -70,9 +70,9 @@ rabbit.encPolyP(text, secret, skey, digest).then(function(res){
 }).catch(function(err){
   ce(err)
 })
-*/
 
-/*
+
+
 rabbit.enc(text, secret, digest, function(err, ctext){
   if(err){return ce(err)};
 
@@ -93,4 +93,3 @@ rabbit.enc(text, secret, digest, function(err, ctext){
 
   })
 });
-*/

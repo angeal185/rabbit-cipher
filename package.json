@@ -1,6 +1,6 @@
 {
   "name": "rabbit-cipher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rabbit 128bit cipher with poly1305 in javascript",
   "main": "index.js",
   "directories": {

@@ -173,7 +173,7 @@ rabbit.decPolyP(ctext, key, sig1, sig2, digest)
  *  @param {string/byteArray/uint8Array} ctext ~ cipher text
  *  @param {integer} len ~ cipher text length
  *  @param {string/byteArray/uint8Array} key ~ poly1305 key
- *  @param {string} digest ~ hmac key digest hex/bytes/binary/uint8/base64
+ *  @param {string} digest ~ poly key digest hex/bytes/binary/uint8/base64
  *  @param {function} cb ~ callback function(err,data)
  **/
 
@@ -184,7 +184,7 @@ rabbit.poly1305.sign(ctext, len, key, digest, cb)
  *  callback ~ verify encrypted data
  *  @param {string/byteArray/uint8Array} sig ~ first signature
  *  @param {string/byteArray/uint8Array} sig ~ second signature
- *  @param {string} digest ~ hmac key digest hex/bytes/binary/uint8/base64
+ *  @param {string} digest ~ poly key digest hex/bytes/binary/uint8/base64
  *  @param {function} cb ~ callback function(err,data)
  **/
 
@@ -196,7 +196,7 @@ rabbit.poly1305.verify(sig1, sig2, digest, cb)
  *  @param {string/byteArray/uint8Array} ctext ~ cipher text
  *  @param {integer} len ~ cipher text length
  *  @param {string/byteArray/uint8Array} key ~ poly1305 key
- *  @param {string} digest ~ hmac key digest hex/bytes/binary/uint8/base64
+ *  @param {string} digest ~ poly key digest hex/bytes/binary/uint8/base64
  **/
 
 rabbit.poly1305.signSync(ctext, len, key, digest)
@@ -206,7 +206,7 @@ rabbit.poly1305.signSync(ctext, len, key, digest)
  *  sync ~ verify encrypted data
  *  @param {string/byteArray/uint8Array} sig ~ first signature
  *  @param {string/byteArray/uint8Array} sig ~ second signature
- *  @param {string} digest ~ hmac key digest hex/bytes/binary/uint8/base64
+ *  @param {string} digest ~ poly key digest hex/bytes/binary/uint8/base64
  **/
 
 rabbit.poly1305.verifySync(sig1, sig2, digest)

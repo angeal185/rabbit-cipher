@@ -135,7 +135,7 @@ rabbit.encPoly(plain, key, skey, digest, cb)
  *  @param {string} digest ~ poly/data digest hex/bytes/binary/uint8/base64
  **/
 
-rabbit.encPolyP(plain, hkey, hash, digest)
+rabbit.encPolyP(plain, key, skey, digest)
 
 
 /* verify poly1305 and decrypt */
@@ -204,8 +204,8 @@ rabbit.poly1305.signSync(ctext, len, key, digest)
 
 /**
  *  sync ~ verify encrypted data
- *  @param {string/byteArray/uint8Array} sig ~ first signature
- *  @param {string/byteArray/uint8Array} sig ~ second signature
+ *  @param {string/byteArray/uint8Array} sig1 ~ first signature
+ *  @param {string/byteArray/uint8Array} sig2 ~ second signature
  *  @param {string} digest ~ poly key digest hex/bytes/binary/uint8/base64
  **/
 
